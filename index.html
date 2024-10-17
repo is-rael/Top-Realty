@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Poster</title>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet"> <!-- Halloween font -->
+    <style>
+        body {
+            text-align: center;
+            background-color: black; /* Set initial background to black */
+            color: white;
+            margin: 0; /* Remove default body margin */
+            overflow: auto; /* Allow scrolling */
+        }
+        h1 {
+            font-family: 'Creepster', cursive; /* Apply Halloween font */
+            color: black; /* Title text color */
+            font-size: 96px; /* Increased size (2x) */
+            text-shadow: 2px 2px 0 red, -2px -2px 0 red, 2px -2px 0 red, -2px 2px 0 red; /* Red shadow for a border effect */
+            position: absolute; /* Position for fading effect */
+            top: 20%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Centering */
+            opacity: 0; /* Start hidden */
+            transition: opacity 1s ease; /* Fading transition */
+            z-index: 1; /* Ensure title is above other elements */
+        }
+        video {
+            position: absolute; /* Positioning the video */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 90%;
+            object-fit: cover; /* Ensure the video covers the area */
+            display: none; /* Hide the video initially */
+            z-index: 0; /* Ensure video is behind the title */
+        }
+        img {
+            display: none; /* Hide the image initially */
+            width: 80%; /* Set width to 80% */
+            height: 80vh; /* Set height to 80% of viewport height */
+            object-fit: contain; /* Maintain aspect ratio */
+            margin: auto; /* Center the image */
+            position: relative; /* Ensure it can be centered with margin */
+            z-index: 1; /* Ensure it's above other elements */
+            opacity: 0; /* Start hidden */
+            transition: opacity 1s ease; /* Fading transition */
+        }
+        #playButton {
+            font-size: 36px; /* Larger font size */
+            padding: 20px 40px; /* Larger padding */
+            cursor: pointer;
+            background-color: blue; /* Button background color */
+            color: white; /* Button text color */
+            border: 2px solid white; /* Button border color */
+            border-radius: 5px;
+            position: absolute; /* Centering */
+            top: 50%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Centering */
+            transition: background-color 0.3s;
+            z-index: 1; /* Ensure button is above the video */
+        }
+        #playButton:hover {
+            background-color: white; /* Button hover background color */
+            color: blue; /* Button hover text color */
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="title">Happy Halloween Top Realty</h1>
+    
+    <video id="myVideo" onended="handleVideoEnd()">
+        <source src="https://imgur.com/p2eRTKQ.mp4" type="video/mp4"> <!-- Replace with a valid video URL -->
+        Your browser does not support the video tag.
+    </video>
+
+    <img id="myImage" src="https://i.imgur.com/32SeEPE.png" alt="Poster Image">
+
+    <audio id="myAudio" src="C:\Users\inter\Desktop\audio.mp3" controls style="display:none;">
+        Your browser does not support the audio element.
+    </audio>
+
+    <button id="playButton">Click here TRC Fam</button>
+
+    <script>
+        document.getElementById('playButton').onclick = function() {
+            // Hide the play button after clicking
+            this.style.display = 'none'; 
+            
+            // Show and play video and audio
+            document.getElementById('myVideo').style.display = 'block';
+            document.getElementById('myVideo').play();
+            document.getElementById('myAudio').play();
+        };
+
+        function handleVideoEnd() {
+            // Fade out video
+            const video = document.getElementById('myVideo');
+            video.style.transition = 'opacity 1s ease';
+            video.style.opacity = 0;
+            setTimeout(() => {
+                video.style.display = 'none'; // Hide the video after fade out
+
+                // Set black background
+                document.body.style.backgroundColor = 'black';
+
+                // Fade in the image
+                const image = document.getElementById('myImage');
+                image.style.display = 'block';
+                setTimeout(() => {
+                    image.style.opacity = 1; // Fade in image
+                }, 10); // Slight delay to allow display change
+            }, 1000); // Time to wait before hiding the video
+        }
+    </script>
+
+</body>
+</html>
